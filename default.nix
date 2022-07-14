@@ -17,7 +17,7 @@ let
   name = "deback";
 
   ## Package version:
-  version = "0.0.0";
+  version = (builtins.readFile ./version.txt);
 in
 pkgs.stdenv.mkDerivation {
   pname = name;
