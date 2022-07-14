@@ -1,0 +1,38 @@
+{
+    "ansi": {
+        "branch": "main",
+        "description": "Nix Wrapper for ansi Script",
+        "homepage": null,
+        "owner": "telostat",
+        "repo": "nix-print-ansi",
+        "rev": "737e10c16e93bf6c17689ad1198310c15bf31a01",
+        "sha256": "0vz3j5c6v3f8scm008j9d9zfr6sl4nvd5cf7vxh1y0yjf3ikgfkx",
+        "type": "tarball",
+        "url": "https://github.com/telostat/nix-print-ansi/archive/737e10c16e93bf6c17689ad1198310c15bf31a01.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "release-22.05",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "8fa57a6538dcdd903a740386ec945ef247c8b577",
+        "sha256": "1d1ghslimcnqc7p453ngj4hszrhdaxwahrp7p06d7nwyvih1zjqf",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/8fa57a6538dcdd903a740386ec945ef247c8b577.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "rrclone": {
+        "branch": "0.0.4",
+        "description": "Rclone wrapper to use YAML/JSON configuration for backup tasks",
+        "homepage": null,
+        "owner": "telostat",
+        "repo": "rrclone",
+        "rev": "e76232a1244cd30bf1a1b0e70236ff683baa9b11",
+        "sha256": "0sfv46sb6p8b9x149s9znxqg9gk15vkph9shcjxmxpi81mxpm25k",
+        "type": "tarball",
+        "url": "https://github.com/telostat/rrclone/archive/e76232a1244cd30bf1a1b0e70236ff683baa9b11.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

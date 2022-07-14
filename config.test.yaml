@@ -1,0 +1,11 @@
+tasks:
+  - name: "Test backup local to local"
+    source:
+      backend:
+        type: "local"
+      path: "/tmp/rrclone/a"
+      filters: []
+    target:
+      backend:
+        type: "local"
+      path: "/tmp/rrclone/b"
