@@ -9,6 +9,7 @@ import qualified Data.Text as T
 import Deback.Tools.Cryptsetup (luksClose, luksFormat, luksOpen)
 import Deback.Tools.Format (formatDisk)
 import Deback.Tools.Mount (mount, unmount)
+import Deback.Tools.Rrclone (runRrclone)
 import Deback.Tools.Smartctl
   ( Disk (..)
   , DiskDevice (..)
@@ -16,8 +17,8 @@ import Deback.Tools.Smartctl
   )
 import qualified System.Console.ANSI as Ansi
 import System.IO (hFlush, stdout)
-import qualified Text.Layout.Table as Table
 import qualified System.Process.Typed as TP
+import qualified Text.Layout.Table as Table
 
 
 doListDisks :: IO ()
@@ -66,6 +67,10 @@ doUnmountDisk name path = whenNotIdiot $ do
   unmount path `catch` (\(e :: TP.ExitCodeException) -> pure ())
   putStrLn "LUKS closing..."
   luksClose name
+
+
+doSync :: FilePath -> Bool -> IO ()
+doSync = runRrclone
 
 
 whenNotIdiot :: IO () -> IO ()
