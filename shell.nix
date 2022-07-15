@@ -12,17 +12,17 @@ let
   ## Import rrclone:
   rrclone = import sources.rrclone;
 
+  ## Get the haskell set:
+  haskell = pkgs.haskell.packages.${compiler};
+
+  ## Get deback:
+  deback = haskell.callPackage (import ./deback.nix) { };
+
+  ## Get deback Haskell dependencies:
+  debackDeps = pkgs.haskell.lib.compose.getHaskellBuildInputs deback;
+
   ## Get our GHC for development:
-  ghc = pkgs.haskell.packages.${compiler}.ghcWithPackages (ps: with ps; [
-    aeson
-    ansi-terminal
-    base
-    bytestring
-    optparse-applicative
-    table-layout
-    text
-    typed-process
-  ]);
+  ghc = haskell.ghcWithPackages (_: debackDeps);
 in
 pkgs.mkShell {
   buildInputs = [
