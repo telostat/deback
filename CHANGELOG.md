@@ -1,7 +1,11 @@
 <a name="unreleased"></a>
 ## [Unreleased]
 
+
+<a name="v0.0.2"></a>
+## [v0.0.2] - 2022-07-15
 ### Chore
+- implement custom release process
 - **dev:** make Nix shell use deback.nix
 - **docs:** update development notes in README
 
@@ -14,6 +18,9 @@
 - add sync command to Haskell application (for rrclone)
 - finish translating scripts to Haskell
 - start translating scripts to Haskell
+
+### Pull Requests
+- Merge pull request [#3](https://github.com/telostat/deback/issues/3) from telostat/vst/haskellize
 
 
 <a name="v0.0.1"></a>
@@ -31,4 +38,5 @@
 - Merge pull request [#2](https://github.com/telostat/deback/issues/2) from telostat/release-please--branches--main--components--release-please-action
 
 
-[Unreleased]: https://github.com/telostat/deback/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/telostat/deback/compare/v0.0.2...HEAD
+[v0.0.2]: https://github.com/telostat/deback/compare/v0.0.1...v0.0.2
