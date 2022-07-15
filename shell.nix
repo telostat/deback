@@ -15,6 +15,7 @@ let
   ## Get our GHC for development:
   ghc = pkgs.haskell.packages.${compiler}.ghcWithPackages (ps: with ps; [
     aeson
+    ansi-terminal
     base
     bytestring
     optparse-applicative
@@ -36,6 +37,7 @@ pkgs.mkShell {
     ghc
 
     ## Runtime dependencies:
+    pkgs.cryptsetup
     pkgs.rclone
     pkgs.smartmontools
     rrclone

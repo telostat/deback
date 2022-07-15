@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Deback.Smartctl where
+module Deback.Tools.Smartctl where
 
 import Data.Aeson ((.:))
 import qualified Data.Aeson as Aeson

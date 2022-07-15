@@ -29,7 +29,10 @@ executable deback
     other-modules:
           Deback.Cli
         , Deback.Programs
-        , Deback.Smartctl
+        , Deback.Tools.Cryptsetup
+        , Deback.Tools.Format
+        , Deback.Tools.Mount
+        , Deback.Tools.Smartctl
         , Paths_deback
 
 
@@ -38,6 +41,7 @@ executable deback
     build-depends:
           base ^>= 4.16.1.0
         , aeson
+        , ansi-terminal
         , bytestring
         , optparse-applicative
         , table-layout
