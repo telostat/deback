@@ -61,3 +61,27 @@ When we need SSH tunnel:
 ```sh
 autossh -M 20000 -f -N -L2222:protected-machine:90 public-machine
 ```
+
+## Development
+
+This program is developed in Haskell on Nix(OS). All Haskell dependencies are
+pinned to the `nixpkgs` snapshot specified inside this repository (see
+[./nix](./nix)).
+
+Development takes place in a Nix shell ([./shell.nix](./shell.nix)). Static
+builds can be obtained using ([./static.nix](./static.nix)). In this case, all
+runtime dependencies (rclone, rrclone, cryptsetup, smartmontools etc.) must be
+installed on the host.
+
+If you are on Nix, use [./default.nix](./default.nix) to install the application
+along with its dependencies.
+
+If there are any new Haskell dependencies, they must be added to both
+`static.nix` and `shell.nix`. Alternatively, you can update shell.nix manually
+and run:
+
+```sh
+cabal2nix --no-haddock . > deback.nix
+```
+
+Note that above is required when cutting a new release anyway.
