@@ -37,7 +37,7 @@ doListDisks = do
       , T.unpack $ fromMaybe "" $ diskModelName d
       , T.unpack $ fromMaybe "" $ diskSerialNumber d
       , T.unpack $ fromMaybe "" $ diskFirmwareVersion d
-      , show $ floor $ ((fromRational $ toRational $ diskUserCapacity d) / 1024 / 1024 / 1024)
+      , show $ floor (fromRational (toRational $ diskUserCapacity d) / 1024 / 1024 / 1024)
       ]
 
 

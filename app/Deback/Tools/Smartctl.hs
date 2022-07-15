@@ -10,8 +10,8 @@ import System.IO (hPutStrLn, stderr)
 import qualified System.Process.Typed as TP
 
 
-data DeviceScanResult = DeviceScanResultDevices
-  { deviceScanResultDevices :: ![DiskDevice]
+newtype DeviceScanResult = DeviceScanResultDevices
+  { deviceScanResultDevices :: [DiskDevice]
   }
 
 
@@ -54,7 +54,7 @@ instance Aeson.FromJSON Disk where
       <*> o .: "model_name"
       <*> o .: "serial_number"
       <*> o .: "firmware_version"
-      <*> (o .: "user_capacity" >>= (Aeson.withObject "DiskUserCapavity" $ \uc -> uc .: "bytes"))
+      <*> (o .: "user_capacity" >>= Aeson.withObject "DiskUserCapavity" (.: "bytes"))
 
 
 listDiskDevices :: IO [DiskDevice]

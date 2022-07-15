@@ -31,10 +31,12 @@ pkgs.mkShell {
     pkgs.lolcat
 
     ## Haskell stuff:
+    ghc
     pkgs.cabal-install
     pkgs.cabal2nix
     pkgs.haskell-language-server
-    ghc
+    pkgs.haskellPackages.apply-refact
+    pkgs.hlint
 
     ## Runtime dependencies:
     pkgs.cryptsetup
