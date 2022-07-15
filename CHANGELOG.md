@@ -1,13 +1,34 @@
-# Changelog
+<a name="unreleased"></a>
+## [Unreleased]
 
-## 0.0.1 (2022-07-14)
+### Chore
+- **dev:** make Nix shell use deback.nix
+- **docs:** update development notes in README
+
+### Feat
+- improve CLI information, refactor Deback.Cli module
+- finish refactoring the application in Haskell
+
+### Refactor
+- apply hlint suggestions
+- add sync command to Haskell application (for rrclone)
+- finish translating scripts to Haskell
+- start translating scripts to Haskell
 
 
-### Features
+<a name="v0.0.1"></a>
+## v0.0.1 - 2022-07-14
+### Chore
+- release 0.0.1
+- integrate release-please
+- read version from version.txt file
+- **main:** release 0.0.1
 
-* initial commit ([f260ffa](https://github.com/telostat/deback/commit/f260ffa601409621ab4ec0a287889a1020e4078c))
+### Feat
+- initial commit
+
+### Pull Requests
+- Merge pull request [#2](https://github.com/telostat/deback/issues/2) from telostat/release-please--branches--main--components--release-please-action
 
 
-### Miscellaneous Chores
-
-* release 0.0.1 ([fcb69a1](https://github.com/telostat/deback/commit/fcb69a1a9fc7612d0d020b7ae96be8b67905f56b))
+[Unreleased]: https://github.com/telostat/deback/compare/v0.0.1...HEAD
