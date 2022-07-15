@@ -30,6 +30,11 @@ pkgs.mkShell {
     pkgs.figlet
     pkgs.lolcat
 
+    ## Release stuff:
+    pkgs.gh
+    pkgs.git
+    pkgs.git-chglog
+
     ## Haskell stuff:
     ghc
     pkgs.cabal-install
