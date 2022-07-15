@@ -32,6 +32,7 @@ executable deback
         , Deback.Tools.Cryptsetup
         , Deback.Tools.Format
         , Deback.Tools.Mount
+        , Deback.Tools.Rrclone
         , Deback.Tools.Smartctl
         , Paths_deback
 

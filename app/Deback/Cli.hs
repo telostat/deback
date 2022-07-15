@@ -5,6 +5,7 @@ import Control.Monad (join)
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
 import Deback.Programs (doInitDisk, doListDisks, doMountDisk, doUnmountDisk, whenNotIdiot)
+import Deback.Tools.Rrclone (doSync)
 import Deback.Tools.Smartctl
   ( Disk (..)
   , DiskDevice (..)
@@ -29,6 +30,10 @@ commandParser =
         <> OA.command
           "unmount-disk"
           ( OA.info optDoUnmountDisk (OA.progDesc "Unmounts disk")
+          )
+        <> OA.command
+          "sync"
+          ( OA.info optDoSync (OA.progDesc "Runs the sync process")
           )
     )
 
@@ -86,6 +91,21 @@ optDoUnmountDisk =
           ( OA.long "path"
               <> OA.metavar "PATH"
               <> OA.help "Path to unmount from"
+          )
+  )
+
+
+optDoSync :: OA.Parser (IO ())
+optDoSync =
+  ( doSync
+      <$> OA.strOption
+        ( OA.long "config"
+            <> OA.metavar "CONFIG"
+            <> OA.help "Path to config file"
+        )
+        <*> OA.switch
+          ( OA.long "dry-run"
+              <> OA.help "Dry-run"
           )
   )
 
