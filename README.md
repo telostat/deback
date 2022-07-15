@@ -68,20 +68,45 @@ This program is developed in Haskell on Nix(OS). All Haskell dependencies are
 pinned to the `nixpkgs` snapshot specified inside this repository (see
 [./nix](./nix)).
 
-Development takes place in a Nix shell ([./shell.nix](./shell.nix)). Static
-builds can be obtained using ([./static.nix](./static.nix)). In this case, all
-runtime dependencies (rclone, rrclone, cryptsetup, smartmontools etc.) must be
-installed on the host.
+Development takes place in a Nix shell ([./shell.nix](./shell.nix)):
+
+```sh
+nix-shell
+```
+
+Static builds can be obtained using [./static.nix](./static.nix):
+
+```sh
+nix-build static.nix
+file result/bin/deback
+```
+
+In this case, all runtime dependencies ([rclone](https://rclone.org/),
+[rrclone](https://github.com/telostat/rrclone),
+[cryptsetup](https://gitlab.com/cryptsetup/cryptsetup),
+[smartmontools](https://www.smartmontools.org/) etc.) must be installed on the
+host and be on the `PATH` when running `deback`.
 
 If you are on Nix, use [./default.nix](./default.nix) to install the application
-along with its dependencies.
+(all its runtime dependencies will be automatically installed) via:
 
-If there are any new Haskell dependencies, they must be added to both
-`static.nix` and `shell.nix`. Alternatively, you can update shell.nix manually
-and run:
+```sh
+nix-env -f default.nix -i
+```
+
+...or:
+
+```sh
+nix-env -f https://github.com/telostat/deback/archive/main.tar.gz -i
+```
+
+[./default.nix](./default.nix), [./shell.nix](./shell.nix) and
+[./static.nix](./static.nix) depend on [./deback.nix](./deback.nix).
+
+If Haskell dependencies are updated or the application version has changed in
+[./deback.cabal](./deback.cabal) file, you must update
+[./deback.nix](./deback.nix) as well:
 
 ```sh
 cabal2nix --no-haddock . > deback.nix
 ```
-
-Note that above is required when cutting a new release anyway.
