@@ -1,27 +1,47 @@
-{ ... }:
+{ compiler ? "ghc922"
+, ...
+}:
 
 let
   ## Import sources:
   sources = import ./nix/sources.nix;
 
   ## Pinned nixpkgs:
-  pkgs = import sources.nixpkgs {};
+  pkgs = import sources.nixpkgs { };
 
-  ## Import ansi print helper:
-  ansi = import sources.ansi {};
+  ## Import rrclone:
+  rrclone = import sources.rrclone;
 
-  ## Import deback:
-  deback = import ./default.nix {};
+  ## Get our GHC for development:
+  ghc = pkgs.haskell.packages.${compiler}.ghcWithPackages (ps: with ps; [
+    aeson
+    base
+    bytestring
+    optparse-applicative
+    table-layout
+    text
+    typed-process
+  ]);
 in
 pkgs.mkShell {
   buildInputs = [
-    ansi
-    deback
+    ## Fancy stuff:
+    pkgs.figlet
+    pkgs.lolcat
+
+    ## Haskell stuff:
+    pkgs.cabal-install
+    pkgs.cabal2nix
+    pkgs.haskell-language-server
+    ghc
+
+    ## Runtime dependencies:
+    pkgs.rclone
+    pkgs.smartmontools
+    rrclone
   ];
 
   shellHook = ''
-    ansi --black --bg-cyan "########################################"
-    ansi --black --bg-cyan "## Welcome to Continous Backups Shell ##"
-    ansi --black --bg-cyan "########################################"
+    figlet -w 999 "DEBACK DEV SHELL" | lolcat -S 42
   '';
 }
