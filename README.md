@@ -99,14 +99,3 @@ nix-env -f default.nix -i
 ```sh
 nix-env -f https://github.com/telostat/deback/archive/main.tar.gz -i
 ```
-
-[./default.nix](./default.nix), [./shell.nix](./shell.nix) and
-[./static.nix](./static.nix) depend on [./deback.nix](./deback.nix).
-
-If Haskell dependencies are updated or the application version has changed in
-[./deback.cabal](./deback.cabal) file, you must update
-[./deback.nix](./deback.nix) as well:
-
-```sh
-cabal2nix --no-haddock . > deback.nix
-```

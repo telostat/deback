@@ -12,12 +12,11 @@ let
   ## Import rrclone:
   rrclone = import sources.rrclone;
 
-
   ## Get the haskell set:
   haskell = pkgs.haskell.packages.${compiler};
 
   ## Get deback:
-  deback = haskell.callPackage (import ./deback.nix) { };
+  deback = haskell.callCabal2nixWithOptions "deback" ./. "--no-haddock" { };
 
   ## Get installable deback:
   installableDeback = deback.overrideAttrs (oldAttrs: rec {

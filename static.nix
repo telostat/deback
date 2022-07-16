@@ -13,7 +13,7 @@ let
   haskell = pkgs.haskell.packages.${compiler};
 
   ## Get deback:
-  deback = haskell.callPackage (import ./deback.nix) { };
+  deback = haskell.callCabal2nixWithOptions "deback" ./. "--no-haddock" { };
 
   ## Override stuff:
   staticDeback = pkgs.haskell.lib.compose.overrideCabal

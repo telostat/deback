@@ -31,14 +31,11 @@ fi
 ## Update version:
 sed -i -E "s/^version:([ ]+).*/version:\\1${_VERSION_NEXT}/g" deback.cabal
 
-## Regenerate deback.nix:
-cabal2nix --no-haddock . > deback.nix
-
 ## Update CHANGELOG.md:
 git-chglog -o CHANGELOG.md --next-tag "v${_VERSION_NEXT}"
 
 ## Add files:
-git add deback.cabal deback.nix CHANGELOG.md
+git add deback.cabal CHANGELOG.md
 
 ## Commit:
 git commit -m "chore(release): v${_VERSION_NEXT}"
