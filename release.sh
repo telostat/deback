@@ -47,7 +47,7 @@ git tag -a -m "Release v${_VERSION_NEXT}" "v${_VERSION_NEXT}"
 git push --follow-tags origin main
 
 ## Build application:
-nix-build static.nix
+nix-build --arg doStatic true
 
 ## Release
 gh release create "v${_VERSION_NEXT}" --generate-notes
