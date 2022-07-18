@@ -111,7 +111,9 @@ nix-env -f https://github.com/telostat/deback/archive/main.tar.gz -i
 
 ## Releasing
 
-Here is the release process:
+Below is the release process. Run these under the `nix-shell`, but `nix-shell
+--pure` won't work for now due to missing `nix-build` command (We will attend it
+later).
 
 ```sh
 git checkout develop

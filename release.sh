@@ -63,4 +63,4 @@ gh release create "v${_VERSION_NEXT}" --generate-notes
 gh release upload "v${_VERSION_NEXT}" "${_outfile}"
 
 ## Remove outfile:
-rm "${_outfile}"
+rm -f "${_outfile}"
