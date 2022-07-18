@@ -1,5 +1,14 @@
 # deback
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/telostat/deback)
+![GitHub contributors](https://img.shields.io/github/contributors/telostat/deback)
+![GitHub](https://img.shields.io/github/license/telostat/deback)
+
+> **Note:** This software is under development and of prototype quality at the
+> moment. Expect significant breaking changes without notification until we
+> reach the first minor version. Until then, we will keep bumping the patch
+> version.
+
 Backups are hard, but we need to do it right for business continuity
 and sanity.
 
@@ -98,4 +107,20 @@ nix-env -f default.nix -i
 
 ```sh
 nix-env -f https://github.com/telostat/deback/archive/main.tar.gz -i
+```
+
+## Releasing
+
+Here is the release process:
+
+```sh
+git checkout develop
+git pull
+git checkout main
+git pull
+git merge --no-ff develop
+bash release.sh -n <NEXT-TAG>
+git checkout develop
+git rebase main
+git push
 ```
