@@ -16,7 +16,7 @@ let
   haskell = pkgs.haskell.packages.${compiler};
 
   ## Get deback:
-  deback = haskell.callPackage (import ./deback.nix) { };
+  deback = haskell.callCabal2nixWithOptions "deback" ./. "--no-haddock" { };
 
   ## Get deback Haskell dependencies:
   debackDeps = pkgs.haskell.lib.compose.getHaskellBuildInputs deback;
