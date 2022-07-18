@@ -31,9 +31,11 @@ pkgs.mkShell {
     pkgs.lolcat
 
     ## Release stuff:
+    pkgs.busybox
     pkgs.gh
     pkgs.git
     pkgs.git-chglog
+    pkgs.upx
 
     ## Haskell stuff:
     ghc
