@@ -49,6 +49,18 @@ git push --follow-tags origin main
 ## Build application:
 nix-build --arg doStatic true
 
+## Get compiled output file path:
+_infile="result/bin/deback"
+
+## Get compressed, renamed output file path:
+_outfile="deback-v${_VERSION_NEXT}-$(uname -s)-$(uname -m)-static"
+
+## Compress file:
+upx -o "${_outfile}" "${_infile}"
+
 ## Release
 gh release create "v${_VERSION_NEXT}" --generate-notes
-gh release upload "v${_VERSION_NEXT}" result/bin/deback
+gh release upload "v${_VERSION_NEXT}" "${_outfile}"
+
+## Remove outfile:
+rm "${_outfile}"
