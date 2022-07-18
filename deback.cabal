@@ -1,24 +1,18 @@
 cabal-version:      2.4
 name:               deback
 version:            0.0.2
-
--- A short (one-line) description of the package.
--- synopsis:
-
--- A longer description of the package.
--- description:
-
--- A URL where users can report bugs.
--- bug-reports:
-
--- The license under which the package is released.
--- license:
+synopsis:           An opinionated backup and archive tool
+description:        Please see the README on GitHub at <https://github.com/telostat/deback#readme>
+homepage:           https://github.com/telostat/deback#readme
+bug-reports:        https://github.com/telostat/deback/issues
 author:             Vehbi Sinan Tunalioglu
 maintainer:         vst@vsthost.com
+copyright:          2022 Teloscube Pte Ltd
+license:            MIT
+license-file:       LICENSE
+category:           System, Backup
+build-type:         Simple
 
--- A copyright notice.
--- copyright:
--- category:
 extra-source-files:
     CHANGELOG.md
     README.md
