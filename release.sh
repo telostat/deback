@@ -31,14 +31,11 @@ fi
 ## Update version:
 sed -i -E "s/^version:([ ]+).*/version:\\1${_VERSION_NEXT}/g" deback.cabal
 
-## Regenerate deback.nix:
-cabal2nix --no-haddock . > deback.nix
-
 ## Update CHANGELOG.md:
 git-chglog -o CHANGELOG.md --next-tag "v${_VERSION_NEXT}"
 
 ## Add files:
-git add deback.cabal deback.nix CHANGELOG.md
+git add deback.cabal CHANGELOG.md
 
 ## Commit:
 git commit -m "chore(release): v${_VERSION_NEXT}"
@@ -50,8 +47,20 @@ git tag -a -m "Release v${_VERSION_NEXT}" "v${_VERSION_NEXT}"
 git push --follow-tags origin main
 
 ## Build application:
-nix-build static.nix
+nix-build --arg doStatic true
+
+## Get compiled output file path:
+_infile="result/bin/deback"
+
+## Get compressed, renamed output file path:
+_outfile="deback-v${_VERSION_NEXT}-$(uname -s)-$(uname -m)-static"
+
+## Compress file:
+upx -o "${_outfile}" "${_infile}"
 
 ## Release
 gh release create "v${_VERSION_NEXT}" --generate-notes
-gh release upload "v${_VERSION_NEXT}" result/bin/deback
+gh release upload "v${_VERSION_NEXT}" "${_outfile}"
+
+## Remove outfile:
+rm "${_outfile}"

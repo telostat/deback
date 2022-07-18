@@ -1,5 +1,14 @@
 # deback
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/telostat/deback)
+![GitHub contributors](https://img.shields.io/github/contributors/telostat/deback)
+![GitHub](https://img.shields.io/github/license/telostat/deback)
+
+> **Note:** This software is under development and of prototype quality at the
+> moment. Expect significant breaking changes without notification until we
+> reach the first minor version. Until then, we will keep bumping the patch
+> version.
+
 Backups are hard, but we need to do it right for business continuity
 and sanity.
 
@@ -74,10 +83,10 @@ Development takes place in a Nix shell ([./shell.nix](./shell.nix)):
 nix-shell
 ```
 
-Static builds can be obtained using [./static.nix](./static.nix):
+Static builds can be obtained via:
 
 ```sh
-nix-build static.nix
+nix-build --arg doStatic true
 file result/bin/deback
 ```
 
@@ -87,8 +96,8 @@ In this case, all runtime dependencies ([rclone](https://rclone.org/),
 [smartmontools](https://www.smartmontools.org/) etc.) must be installed on the
 host and be on the `PATH` when running `deback`.
 
-If you are on Nix, use [./default.nix](./default.nix) to install the application
-(all its runtime dependencies will be automatically installed) via:
+If you are on Nix, install the application (all its runtime dependencies will be
+automatically installed) via:
 
 ```sh
 nix-env -f default.nix -i
@@ -100,13 +109,18 @@ nix-env -f default.nix -i
 nix-env -f https://github.com/telostat/deback/archive/main.tar.gz -i
 ```
 
-[./default.nix](./default.nix), [./shell.nix](./shell.nix) and
-[./static.nix](./static.nix) depend on [./deback.nix](./deback.nix).
+## Releasing
 
-If Haskell dependencies are updated or the application version has changed in
-[./deback.cabal](./deback.cabal) file, you must update
-[./deback.nix](./deback.nix) as well:
+Here is the release process:
 
 ```sh
-cabal2nix --no-haddock . > deback.nix
+git checkout develop
+git pull
+git checkout main
+git pull
+git merge --no-ff develop
+bash release.sh -n <NEXT-TAG>
+git checkout develop
+git rebase main
+git push
 ```
