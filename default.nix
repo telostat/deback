@@ -39,7 +39,7 @@ let
     ];
 
     postFixup = (oldAttrs.postFixup or "") + ''
-      wrapProgram $out/bin/deback --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.rclone pkgs.smartmontools ]}
+      wrapProgram $out/bin/deback --prefix PATH : ${pkgs.lib.makeBinPath [ rrclone pkgs.rclone pkgs.smartmontools ]}
     '';
   });
 
