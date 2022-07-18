@@ -1,6 +1,6 @@
 cabal-version:      2.4
 name:               deback
-version:            0.0.2
+version:            0.0.3
 synopsis:           An opinionated backup and archive tool
 description:        Please see the README on GitHub at <https://github.com/telostat/deback#readme>
 homepage:           https://github.com/telostat/deback#readme
