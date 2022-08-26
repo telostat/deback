@@ -12,7 +12,7 @@ parser =
     (OA.helper <*> versionOptParser <*> commandParser)
     ( OA.fullDesc
         <> OA.progDesc "See available commands."
-        <> OA.header ("deback - Some Backup and Archive Tool v" <> showVersion version)
+        <> OA.header ("deback - Some File Synchronisation and Backup Tool v" <> showVersion version)
     )
 
 
