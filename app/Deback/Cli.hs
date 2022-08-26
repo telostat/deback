@@ -32,6 +32,7 @@ commandParser =
       <> OA.command "backup-info" (OA.info optDoBackupInfo progDescBackupInfo)
       <> OA.command "backup-run" (OA.info optDoBackupRun progDescBackupRun)
       <> OA.command "backup-snapshots" (OA.info optDoBackupSnapshots progDescBackupSnapshots)
+      <> OA.command "sync-and-backup" (OA.info optDoSyncAndBackup progDescSyncAndBackup)
 
 
 optDoListDisks :: OA.Parser (IO ())
@@ -159,5 +160,20 @@ progDescBackupSnapshots :: OA.InfoMod a
 progDescBackupSnapshots =
   OA.progDesc
     "Shows backup snapshots. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoSyncAndBackup :: OA.Parser (IO ())
+optDoSyncAndBackup =
+  Programs.doSyncAndBackup
+    <$> OA.strOption (OA.long "config-sync" <> OA.metavar "SYNC-CONFIG-FILE" <> OA.help "Path to synchronisation configuration file")
+    <*> OA.strOption (OA.long "config-backup" <> OA.metavar "BACKUP-CONFIG-FILE" <> OA.help "Path to backup configuration file")
+
+
+progDescSyncAndBackup :: OA.InfoMod a
+progDescSyncAndBackup =
+  OA.progDesc
+    "Runs synchronisation and backup processes respectively. \
     \Note that you most probably do not want to be super user when running \
     \this command."

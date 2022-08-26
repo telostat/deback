@@ -90,6 +90,10 @@ doBackupSnapshots :: FilePath -> IO ()
 doBackupSnapshots = runAutoresticSnapshots
 
 
+doSyncAndBackup :: FilePath -> FilePath -> IO ()
+doSyncAndBackup configSync configBackup = doSync configSync False >> doBackupRun configBackup
+
+
 whenNotIdiot :: IO () -> IO ()
 whenNotIdiot act = do
   let check = "I am not an idiot!"
