@@ -96,7 +96,7 @@ progDescUnmountDisk =
 optDoSync :: OA.Parser (IO ())
 optDoSync =
   Programs.doSync
-    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
     <*> OA.switch (OA.long "dry-run" <> OA.help "Dry-run (ie. no actual syncing will take place)")
 
 
@@ -111,7 +111,7 @@ progDescSync =
 optDoBackupCheck :: OA.Parser (IO ())
 optDoBackupCheck =
   Programs.doBackupCheck
-    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
 
 
 progDescBackupCheck :: OA.InfoMod a
@@ -125,7 +125,7 @@ progDescBackupCheck =
 optDoBackupInfo :: OA.Parser (IO ())
 optDoBackupInfo =
   Programs.doBackupInfo
-    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
 
 
 progDescBackupInfo :: OA.InfoMod a
@@ -139,7 +139,7 @@ progDescBackupInfo =
 optDoBackupRun :: OA.Parser (IO ())
 optDoBackupRun =
   Programs.doBackupRun
-    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
 
 
 progDescBackupRun :: OA.InfoMod a
@@ -153,7 +153,7 @@ progDescBackupRun =
 optDoBackupSnapshots :: OA.Parser (IO ())
 optDoBackupSnapshots =
   Programs.doBackupSnapshots
-    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
 
 
 progDescBackupSnapshots :: OA.InfoMod a
