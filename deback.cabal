@@ -23,6 +23,7 @@ executable deback
     other-modules:
           Deback.Cli
         , Deback.Programs
+        , Deback.Tools.Autorestic
         , Deback.Tools.Cryptsetup
         , Deback.Tools.Format
         , Deback.Tools.Mount

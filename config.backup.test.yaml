@@ -1,0 +1,23 @@
+version: 2
+
+backends:
+  backup1-target-local:
+    type: local
+    path: '/tmp/deback/testing/backup/backup1'
+    key: secret1
+
+  backup2-target-local:
+    type: local
+    path: '/tmp/deback/testing/backup/backup2'
+    key: secret2
+
+locations:
+  backup1-source:
+    from: /tmp/deback/testing/sync/targets/target1
+    to:
+      - backup1-target-local
+
+  backup2-source:
+    from: /tmp/deback/testing/sync/targets/target2
+    to:
+      - backup2-target-local

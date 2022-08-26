@@ -1,0 +1,22 @@
+tasks:
+  - name: "Sync source1 to target1"
+    source:
+      backend:
+        type: "local"
+      path: "/tmp/deback/testing/sync/sources/source1"
+      filters: []
+    target:
+      backend:
+        type: "local"
+      path: "/tmp/deback/testing/sync/targets/target1"
+
+  - name: "Sync source2 to target2"
+    source:
+      backend:
+        type: "local"
+      path: "/tmp/deback/testing/sync/sources/source2"
+      filters: []
+    target:
+      backend:
+        type: "local"
+      path: "/tmp/deback/testing/sync/targets/target2"
