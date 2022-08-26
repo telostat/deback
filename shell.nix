@@ -46,6 +46,7 @@ pkgs.mkShell {
     pkgs.hlint
 
     ## Runtime dependencies:
+    pkgs.autorestic
     pkgs.cryptsetup
     pkgs.rclone
     pkgs.smartmontools

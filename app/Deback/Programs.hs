@@ -6,6 +6,7 @@ module Deback.Programs where
 import Control.Exception (IOException, catch)
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
+import Deback.Tools.Autorestic (runAutoresticBackup, runAutoresticCheck, runAutoresticInfo, runAutoresticSnapshots)
 import Deback.Tools.Cryptsetup (luksClose, luksFormat, luksOpen)
 import Deback.Tools.Format (formatDisk)
 import Deback.Tools.Mount (mount, unmount)
@@ -71,6 +72,22 @@ doUnmountDisk name path = whenNotIdiot $ do
 
 doSync :: FilePath -> Bool -> IO ()
 doSync = runRrclone
+
+
+doBackupCheck :: FilePath -> IO ()
+doBackupCheck = runAutoresticCheck
+
+
+doBackupInfo :: FilePath -> IO ()
+doBackupInfo = runAutoresticInfo
+
+
+doBackupRun :: FilePath -> IO ()
+doBackupRun config = runAutoresticCheck config >> runAutoresticBackup config
+
+
+doBackupSnapshots :: FilePath -> IO ()
+doBackupSnapshots = runAutoresticSnapshots
 
 
 whenNotIdiot :: IO () -> IO ()

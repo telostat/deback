@@ -28,6 +28,10 @@ commandParser =
       <> OA.command "mount-disk" (OA.info optDoMountDisk progDescMountDisk)
       <> OA.command "unmount-disk" (OA.info optDoUnmountDisk progDescUnmountDisk)
       <> OA.command "sync" (OA.info optDoSync progDescSync)
+      <> OA.command "backup-check" (OA.info optDoBackupCheck progDescBackupCheck)
+      <> OA.command "backup-info" (OA.info optDoBackupInfo progDescBackupInfo)
+      <> OA.command "backup-run" (OA.info optDoBackupRun progDescBackupRun)
+      <> OA.command "backup-snapshots" (OA.info optDoBackupSnapshots progDescBackupSnapshots)
 
 
 optDoListDisks :: OA.Parser (IO ())
@@ -99,5 +103,61 @@ progDescSync :: OA.InfoMod a
 progDescSync =
   OA.progDesc
     "Runs the sync process. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupCheck :: OA.Parser (IO ())
+optDoBackupCheck =
+  Programs.doBackupCheck
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+
+
+progDescBackupCheck :: OA.InfoMod a
+progDescBackupCheck =
+  OA.progDesc
+    "Checks the backup configuration. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupInfo :: OA.Parser (IO ())
+optDoBackupInfo =
+  Programs.doBackupInfo
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+
+
+progDescBackupInfo :: OA.InfoMod a
+progDescBackupInfo =
+  OA.progDesc
+    "Displays backup plan. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupRun :: OA.Parser (IO ())
+optDoBackupRun =
+  Programs.doBackupRun
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+
+
+progDescBackupRun :: OA.InfoMod a
+progDescBackupRun =
+  OA.progDesc
+    "Runs the backup process. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupSnapshots :: OA.Parser (IO ())
+optDoBackupSnapshots =
+  Programs.doBackupSnapshots
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+
+
+progDescBackupSnapshots :: OA.InfoMod a
+progDescBackupSnapshots =
+  OA.progDesc
+    "Shows backup snapshots. \
     \Note that you most probably do not want to be super user when running \
     \this command."
