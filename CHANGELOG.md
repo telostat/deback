@@ -2,15 +2,40 @@
 ## [Unreleased]
 
 
+<a name="v0.0.4"></a>
+## [v0.0.4] - 2022-08-27
+### Chore
+- **dev:** update release script and document release process
+- **dev:** update release process
+
+### Docs
+- update README
+
+### Feat
+- add sync-and-backup command
+- add backup commands
+
+### Refactor
+- add restic to deback exec path
+- revisit CLI option descriptions
+- update program header
+
+### Pull Requests
+- Merge pull request [#10](https://github.com/telostat/deback/issues/10) from telostat/develop
+- Merge pull request [#9](https://github.com/telostat/deback/issues/9) from telostat/vst/issue-8
+- Merge pull request [#7](https://github.com/telostat/deback/issues/7) from telostat/vst/update-release-process
+
+
 <a name="v0.0.3"></a>
 ## [v0.0.3] - 2022-07-18
 ### Chore
-- update package metadata, add LICENSE
 - gitignore result/
+- update package metadata, add LICENSE
 - **build:** improve release artifact
 - **build:** parameterize default.nix for static builds
 - **build:** use callCabal2nix* instead of deback.nix
 - **docs:** update README
+- **release:** v0.0.3
 
 ### Fix
 - add rrclone to PATH on Nix installation
@@ -58,6 +83,7 @@
 - Merge pull request [#2](https://github.com/telostat/deback/issues/2) from telostat/release-please--branches--main--components--release-please-action
 
 
-[Unreleased]: https://github.com/telostat/deback/compare/v0.0.3...HEAD
+[Unreleased]: https://github.com/telostat/deback/compare/v0.0.4...HEAD
+[v0.0.4]: https://github.com/telostat/deback/compare/v0.0.3...v0.0.4
 [v0.0.3]: https://github.com/telostat/deback/compare/v0.0.2...v0.0.3
 [v0.0.2]: https://github.com/telostat/deback/compare/v0.0.1...v0.0.2
