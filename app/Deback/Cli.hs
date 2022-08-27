@@ -12,7 +12,7 @@ parser =
     (OA.helper <*> versionOptParser <*> commandParser)
     ( OA.fullDesc
         <> OA.progDesc "See available commands."
-        <> OA.header ("deback - Some Backup and Archive Tool v" <> showVersion version)
+        <> OA.header ("deback - Some File Synchronisation and Backup Tool v" <> showVersion version)
     )
 
 
@@ -28,6 +28,11 @@ commandParser =
       <> OA.command "mount-disk" (OA.info optDoMountDisk progDescMountDisk)
       <> OA.command "unmount-disk" (OA.info optDoUnmountDisk progDescUnmountDisk)
       <> OA.command "sync" (OA.info optDoSync progDescSync)
+      <> OA.command "backup-check" (OA.info optDoBackupCheck progDescBackupCheck)
+      <> OA.command "backup-info" (OA.info optDoBackupInfo progDescBackupInfo)
+      <> OA.command "backup-run" (OA.info optDoBackupRun progDescBackupRun)
+      <> OA.command "backup-snapshots" (OA.info optDoBackupSnapshots progDescBackupSnapshots)
+      <> OA.command "sync-and-backup" (OA.info optDoSyncAndBackup progDescSyncAndBackup)
 
 
 optDoListDisks :: OA.Parser (IO ())
@@ -91,7 +96,7 @@ progDescUnmountDisk =
 optDoSync :: OA.Parser (IO ())
 optDoSync =
   Programs.doSync
-    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to config file")
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
     <*> OA.switch (OA.long "dry-run" <> OA.help "Dry-run (ie. no actual syncing will take place)")
 
 
@@ -99,5 +104,76 @@ progDescSync :: OA.InfoMod a
 progDescSync =
   OA.progDesc
     "Runs the sync process. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupCheck :: OA.Parser (IO ())
+optDoBackupCheck =
+  Programs.doBackupCheck
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
+
+
+progDescBackupCheck :: OA.InfoMod a
+progDescBackupCheck =
+  OA.progDesc
+    "Checks the backup configuration. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupInfo :: OA.Parser (IO ())
+optDoBackupInfo =
+  Programs.doBackupInfo
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
+
+
+progDescBackupInfo :: OA.InfoMod a
+progDescBackupInfo =
+  OA.progDesc
+    "Displays backup plan. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupRun :: OA.Parser (IO ())
+optDoBackupRun =
+  Programs.doBackupRun
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
+
+
+progDescBackupRun :: OA.InfoMod a
+progDescBackupRun =
+  OA.progDesc
+    "Runs the backup process. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoBackupSnapshots :: OA.Parser (IO ())
+optDoBackupSnapshots =
+  Programs.doBackupSnapshots
+    <$> OA.strOption (OA.long "config" <> OA.metavar "CONFIG-FILE" <> OA.help "Path to configuration file")
+
+
+progDescBackupSnapshots :: OA.InfoMod a
+progDescBackupSnapshots =
+  OA.progDesc
+    "Shows backup snapshots. \
+    \Note that you most probably do not want to be super user when running \
+    \this command."
+
+
+optDoSyncAndBackup :: OA.Parser (IO ())
+optDoSyncAndBackup =
+  Programs.doSyncAndBackup
+    <$> OA.strOption (OA.long "config-sync" <> OA.metavar "SYNC-CONFIG-FILE" <> OA.help "Path to synchronisation configuration file")
+    <*> OA.strOption (OA.long "config-backup" <> OA.metavar "BACKUP-CONFIG-FILE" <> OA.help "Path to backup configuration file")
+
+
+progDescSyncAndBackup :: OA.InfoMod a
+progDescSyncAndBackup =
+  OA.progDesc
+    "Runs synchronisation and backup processes respectively. \
     \Note that you most probably do not want to be super user when running \
     \this command."
