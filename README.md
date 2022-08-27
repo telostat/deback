@@ -357,14 +357,10 @@ Below is the release process. Run these under the `nix-shell`, but `nix-shell
 --pure` won't work for now due to missing `nix-build` command (We will attend it
 later).
 
+Note that `<NEW-VERSION>` is given without `v` prefix (For example: `1.0.0`).
+
 ```sh
-git checkout develop
-git pull
 git checkout main
 git pull
-git merge --no-ff develop
-bash release.sh -n <NEXT-TAG>
-git checkout develop
-git rebase main
-git push
+./release.sh -n <NEW-VERSION>
 ```

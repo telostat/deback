@@ -1,66 +1,95 @@
 #!/usr/bin/env bash
 
+## Stop on errors:
+set -eo pipefail
+
+## Helper function to print log messages.
+_log() {
+    echo "[RELEASE LOG]" "${@}"
+}
+
+## Helper function to print errors.
 _error() {
-    echo "$@" 1>&2
+    1>&2 echo "[RELEASE ERROR]" "${@}"
 }
 
+## Helper function to print usage.
 _usage() {
-    _error "Usage: $0 -n <VERSION>"
-    exit 1
+    echo "Usage: $0 [-h] -n <VERSION>"
 }
 
-_VERSION_NEXT=""
+## Declare variables:
+_version=""
+_infile="result/bin/deback"
+_outfile=""
 
-while getopts ":n:" o; do
+## Parse command line arguments:
+while getopts "n:h" o; do
     case "${o}" in
     n)
-        _VERSION_NEXT="${OPTARG}"
+        _version="${OPTARG}"
+        _outfile="deback-v${_version}-$(uname -s)-$(uname -m)-static"
+        ;;
+    h)
+        _usage
+        exit 0
         ;;
     *)
-        _usage
+        1>&2 _usage
+        exit 1
         ;;
     esac
 done
 shift $((OPTIND - 1))
 
-
-if [ -z "${_VERSION_NEXT}" ]; then
-    _usage
+_log "Checking variables..."
+if [ -z "${_version}" ]; then
+    1>&2 _usage
+    exit 1
+else
+    _log "Version is ${_version}. Proceeding..."
+    _log "Statically built, compressed executable binary filename is ${_outfile}. Proceeding..."
 fi
 
-## Update version:
-sed -i -E "s/^version:([ ]+).*/version:\\1${_VERSION_NEXT}/g" deback.cabal
+_log "Checking repository..."
+if [[ -z "$(git status --porcelain)" ]]; then
+    _log "Repository is clean. Proceeding..."
+else
+    _error "Repository is not clean. Aborting..."
+    exit 1
+fi
 
-## Update CHANGELOG.md:
-git-chglog -o CHANGELOG.md --next-tag "v${_VERSION_NEXT}"
+_log "Updating application version..."
+sed -i -E "s/^version:([ ]+).*/version:\\1${_version}/g" deback.cabal
 
-## Add files:
+_log "Generating changelog..."
+git-chglog --output CHANGELOG.md --next-tag "v${_version}"
+
+_log "Staging changes..."
 git add deback.cabal CHANGELOG.md
 
-## Commit:
-git commit -m "chore(release): v${_VERSION_NEXT}"
+_log "Committing changes..."
+git commit -m "chore(release): v${_version}"
 
-## Tag:
-git tag -a -m "Release v${_VERSION_NEXT}" "v${_VERSION_NEXT}"
+_log "Tagging version..."
+git tag -a -m "Release v${_version}" "v${_version}"
 
-## Push:
-git push --follow-tags origin main
-
-## Build application:
+_log "Building static binary..."
 nix-build --arg doStatic true
 
-## Get compiled output file path:
-_infile="result/bin/deback"
-
-## Get compressed, renamed output file path:
-_outfile="deback-v${_VERSION_NEXT}-$(uname -s)-$(uname -m)-static"
-
-## Compress file:
+_log "Compressing static binary..."
 upx -o "${_outfile}" "${_infile}"
 
-## Release
-gh release create "v${_VERSION_NEXT}" --generate-notes
-gh release upload "v${_VERSION_NEXT}" "${_outfile}"
+_log "Pushing changes to remote..."
+git push --follow-tags origin main
 
-## Remove outfile:
+_log "Creating the release..."
+gh release create "v${_version}" --generate-notes
+
+_log "Uploading release artifacts..."
+gh release upload "v${_version}" "${_outfile}"
+
+_log "Removing compressed, static binary..."
 rm -f "${_outfile}"
+
+_log "Finished!"
